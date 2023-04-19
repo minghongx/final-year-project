@@ -1,3 +1,11 @@
+## Demonstrations
+
+https://user-images.githubusercontent.com/86758413/233221789-9ce959f5-4895-4921-9393-2e0eda7233c8.mp4
+
+https://user-images.githubusercontent.com/86758413/233221813-2f6d39f4-ada8-479b-97b9-0966306220dc.mp4
+
+https://user-images.githubusercontent.com/86758413/233221847-d864705f-01a5-461f-9ff8-b52dcb108992.mp4
+
 ## Activity Diary
 
 ```mermaid
