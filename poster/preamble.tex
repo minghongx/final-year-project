@@ -1,0 +1,29 @@
+\documentclass{beamer}
+
+%% Possible paper sizes: a0, a0b, a1, a2, a3, a4.
+%% Possible orientations: portrait, landscape
+%% Font sizes can be changed using the scale option.
+\usepackage[size=a1, orientation=portrait, scale=1.8]{beamerposter}
+
+\usetheme{LLT-poster}
+\usecolortheme{ComingClean}
+
+\usepackage{fontspec}
+
+\usepackage{libertine}
+\usepackage[scaled=0.92]{inconsolata}
+\usepackage[libertine]{newtxmath}
+
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+\usepackage{svg}
+\svgpath{ {./images/} }
+
+\usepackage{algpseudocodex}
+\usepackage{algorithm}  % https://ctan.org/pkg/algorithms
+
+\author[Supervisor: Dr Murat Üney | Assessor: Prof. Jason Ralph]{Xu, Minghong (Student ID: 201601082)}
+\title{Mapless Navigation\\with Deep Reinforcement Learning}
+\institute{Department of Electrical Engineering and Electronics, University of Liverpool}
+%% Optional foot image
+\footimage{\includesvg[scale=4.063]{repo-qrcode}}

@@ -1,0 +1,193 @@
+\newpage
+\section{Theory} \label{sec:theory}
+{
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1.2ex}
+
+\subsection{Preliminaries}
+
+The reinforcement learning problem can be defined as a policy search in a sequential decision-making process. At each time step $t$, given a state $s_t \in S$, the agent takes an action $a_t \in A$ with respect to its policy $\pi \colon S \to A$, receives a reward $r(s_t, a_t)$, and transitions to a new state according to $p(s_{t+1}|s_t, a_t)$. Formally, this sequential decision-making process is modelled as a Markov decision process (MDP), which is a quadruple $\langle S, A, p, r \rangle$, where:
+\begin{itemize}
+\item $S$, called the state space, is a set of all valid states.
+\item $A$, called the action space, is a set of all valid actions.
+\item $p \colon S \times A \to \Delta S$ is a transition probability function that represents the probability of transitioning to the next state if a certain action is taken in the current state.
+\item $r \colon S \times A \to \mathbb{R}$ is a reward function that generates a reward signal.
+\end{itemize}
+
+The aim is to find a policy that yields the maximal sum of rewards:
+\begin{displaymath}
+\max_{\pi} \sum_{t} \mathbb{E}_{s_t \sim p\pi, a_t \sim \pi} \left[ r(s_t,a_t) \right]
+\end{displaymath}
+
+A trajectory, also known as an episode or rollout, is a sequence of states and actions:
+\begin{displaymath}
+(s_0, a_0, s_1, a_1, \ldots)
+\end{displaymath}
+
+The first state $s_0$ is sampled from an initial state distribution, sometimes denoted by $\rho_0$:
+\begin{displaymath}
+s_0 \sim \rho_0(\cdot)
+\end{displaymath}
+
+For convenience, let $\rho_\pi$ denote the state-action marginals of the trajectory distribution induced by the policy, and then simplify the subscript of the expectation operator of the aim as:
+\begin{displaymath}
+\max_{\pi} \sum_{t} \mathbb{E}_{(s_t, a_t) \sim \rho_\pi} \left[ r(s_t,a_t) \right]
+\end{displaymath}
+
+Most of the time, the expectation operator is taken outside:
+\begin{displaymath}
+\max_{\pi} \mathbb{E}_{s_0, a_0, s_1, a_1, \ldots} \left[ \sum_{t} r(s_t,a_t) \right],
+\end{displaymath}
+where $s_0 \sim \rho_0(\cdot)$, $a_t \sim \pi(\cdot|s_t)$, and $s_{t} \sim p(\cdot|s_{t-1},a_{t-1})$ as defined before. The sum of rewards $\sum r(s,a)$ is named as return (long-term cumulative reward), which is denoted by $R$. Thus, the goal can also be rephrased as finding a policy that maximises the expected return $\mathbb{E} \left[ R \right]$.
+
+\subsection{Policy Gradient}
+
+The phrase "policy gradient" refers to a class of methods that search for an optimal policy by optimising a parameterised policy with respect to the expected return by gradient descent. Let $\phi$ denote the parameter of the policy, i.e., $\pi_\phi$. Methods that optimise $\pi_\phi$ by:
+\begin{displaymath}
+\phi \gets \phi - \lambda\nabla_{\phi}J(\phi),
+\end{displaymath}
+where $\lambda$ controls the amount that $\phi$ is updated, and $J(\phi) = \mathbb{E} \left[ R \right]$ is the objective to maximise for the policy, are called policy gradient methods. "Policy gradient" can also refer to $\nabla_{\phi}J(\phi)$ in the above expression.
+
+Policy optimisation can be done using gradient-based approaches other than policy gradient, e.g., TRPO \cite{ref:trpo} and PPO \cite{ref:ppo}. Instead of policy optimisation, policy search can be done using gradient-free approaches such as evolutionary computation.
+
+\subsection{Actor-Critic}
+
+Actor-Critic refers to an algorithm pattern that estimates a value function in addition to the policy function. The estimated value function is used to assess the policy's action selections. The policy is then optimised in the direction suggested by the value function. Thus, it's natural to think of the value function as a "critic" and the policy as an "actor." The value function could be the action-value (a.k.a. action-quality) $Q(s,a;\theta)$ or state-value $V(s;\theta)$ depending on the algorithm design. Taking action-value actor-critic as an example, the pattern is:
+\begin{align*}
+\theta &\gets \theta - \lambda_Q\nabla_{\theta}J_Q(\theta) \\
+\phi &\gets \phi - \lambda_\pi\nabla_{\phi}J_\pi(\phi),
+\end{align*}
+where $\lambda_Q$ and $\lambda_\pi$ respectively control the amount that $\theta$ and $\phi$ are updated, and $J_Q(\theta)$ and $J_\pi(\phi)$ are objectives to maximise for both the critic and the actor. Specifically, the actor objective is to maximise the expected return under the action-value function $Q$, while the critic objective could be minimising Bellman error with optimal action-value $Q^*$ described by Bellman equation.
+
+\subsection{Deep Deterministic Policy Gradient (DDPG)}
+
+DDPG can be classified as an action-value actor-critic policy gradient algorithm. It estimates both the action-value and policy and optimises the function approximators by gradient descent. The term "Deep" means that this algorithm uses backward propagation of errors (short for backpropagation), a technique from deep learning, to calculate gradients.
+
+A deterministic policy is a special case of a standard stochastic policy that gives the probability of 1 to one available action and 0 to the remaining actions. DDPG treats the stochasticity, roughly equivalent to the ability to explore, of the policy separately. It constructs an exploration policy by adding noise sampled from a stochastic process to the deterministic policy:
+\begin{displaymath}
+a_t \sim \pi_\phi(\cdot|s_t) + \epsilon\text{, where } \epsilon \sim \mathcal{N}(0,\sigma)
+\end{displaymath}
+
+DDPG adopts the Q-learning \cite{ref:q-learning} strategy to optimise the action-value function approximator $Q_\theta(s,a)$ by minimising the loss:
+\begin{displaymath}
+L(\theta) = \mathbb{E}_{(s_t, a_t) \sim \rho_\pi} \left[ (Q_\theta(s_t,a_t) - y_t)^2 \right]
+\end{displaymath}
+where
+\begin{displaymath}
+y_t = r(s_t,a_t) + \gamma Q_\theta(s_{t+1},\pi(\cdot|s_{t+1}))
+\end{displaymath}
+is called \textit{target}. Since the target also depends on $\theta$, this leads to unstable learning. To solve this problem, \cite{ref:q-learning} introduced the use of a \textit{replay buffer} and a separate \textit{target network} for calculating the target $y_t$. DDPG employ these, as shown in Algorithm \ref{alg:ddpg}.
+
+A replay buffer serves as a memory unit that stores and manages the agent's past experiences. Sequential experiences collected by the agent are often highly correlated, which can lead to biased learning and slow convergence. The replay buffer helps break these correlations by randomly sampling experiences from its memory. In addition, the replay buffer also improves the sample efficiency since it enable the use of the past experiences, though this increase the computational cost due to the need to sample and process experiences from the buffer.
+
+The target network is a delayed version of the regular network, achieved through polyak averaging (exponential moving average), which has been shown to stabilise training \cite{ref:dqn-humanlevel}. This involves computing a weighted average $\overline{\theta}$ of the regular $Q_\theta(s,a)$ network's weights instead of simply copying them when updating the target network at each iteration.
+
+\begin{algorithm}
+\caption{Deep Deterministic Policy Gradient \cite{ref:ddpg}}
+\label{alg:ddpg}
+\begin{algorithmic}
+\State Initialise a critic networks $Q_{\theta}$ and an actor network $\pi_\phi$ with random parameters $\theta$ and $\phi$
+\State Initialise target network weights $\overline{\theta} \gets \theta$ and $\overline{\phi} \gets \phi$
+\State Initialise an empty replay buffer $\mathcal{B}$
+\For{each iteration}
+    \For{each environment step $t$}
+        \State Sample action with exploration noise $a_t \sim \pi_\phi(\cdot|s_t) + \epsilon$, where $\epsilon \sim \mathcal{N}(0,\sigma)$
+        \State $s_{t+1} \sim p(\cdot|s_t,a_t)$
+        \State $\mathcal{B} \gets \mathcal{B} \cup \left\{(s_t,a_t,r(s_t,a_t),s_{t+1})\right\}$
+    \EndFor
+    \For{each gradient step}
+        \State $\theta \gets \theta - \lambda_Q\nabla_{\theta}J_Q(\theta_i)$
+        \State $\phi \gets \phi - \lambda_\pi\nabla_{\phi}J_\pi(\phi)$
+        \LComment{Update target networks' weights:}
+        \State $\overline{\theta} \gets \tau\theta + (1-\tau)\overline{\theta}$
+        \State $\overline{\phi} \gets \tau\phi + (1-\tau)\overline{\phi}$
+    \EndFor
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Twin-delayed Deep Deterministic Policy Gradient (TD3)}
+
+TD3 is a descendant of DDPG. It introduces twin critic technique and delayed policy and target networks update to address the action-value function approximation error which causes unstable performance DDPG suffers from \cite{ref:td3}.
+
+\begin{algorithm}
+\caption{Twin-delayed Deep Deterministic Policy Gradient \cite{ref:td3}}
+\label{alg:td3}
+\begin{algorithmic}
+\State Initialise two critic networks $Q_{\theta_1}$, $Q_{\theta_2}$ and an actor network $\pi_\phi$ with random parameters $\theta_1$, $\theta_2$, $\phi$
+\State Initialise target network weights $\overline{\theta}_i \gets \theta_i$  for $i \in \left\{1,2\right\}$ and $\overline{\phi} \gets \phi$
+\State Initialise an empty replay buffer $\mathcal{B}$
+\For{each iteration}
+    \For{each environment step $t$}
+        \State Sample action with exploration noise $a_t \sim \pi_\phi(\cdot|s_t) + \epsilon$, where $\epsilon \sim \mathcal{N}(0,\sigma)$
+        \State $s_{t+1} \sim p(\cdot|s_t,a_t)$
+        \State $\mathcal{B} \gets \mathcal{B} \cup \left\{(s_t,a_t,r(s_t,a_t),s_{t+1})\right\}$
+    \EndFor
+    \For{each gradient step}
+        \State $\theta_i \gets \theta_i - \lambda_Q\nabla_{\theta_i}J_Q(\theta_i)$ for $i \in \left\{1,2\right\}$
+        \If{$t \bmod d = 0$}
+            \State $\phi \gets \phi - \lambda_\pi\nabla_{\phi}J_\pi(\phi)$
+            \LComment{Update target networks' weights:}
+            \State $\overline{\theta}_i \gets \tau\theta_i + (1-\tau)\overline{\theta}_i$ for $i \in \left\{1,2\right\}$
+            \State $\overline{\phi} \gets \tau\phi + (1-\tau)\overline{\phi}$
+        \EndIf
+    \EndFor
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Soft Actor-Critic (SAC)}
+
+To better treat the exploration and exploitation trade-off in mathematics, SAC add a policy entropy term into the classic goal:
+\begin{displaymath}
+\pi\mbox{*} = \operatorname*{\mathrm{arg\,max}}_\pi \sum_t \mathop{\mathbb{E}}_{(s_t,a_t)\sim\rho_\pi}\left[r(s_t,a_t)+\alpha\mathcal{H}(\pi(\cdot|s_t))\right],
+\end{displaymath}
+where $\alpha$ is the temperature parameter that determines the relative importance of the entropy term versus the reward. Formally, the objective is to solve the constrained optimisation problem:
+\begin{displaymath}
+\max_{\pi} \sum_{t} \mathbb{E}_{(s_t, a_t) \sim \rho_\pi} \left[ r(s_t,a_t) \right]
+\end{displaymath}
+subject to
+\begin{displaymath}
+\mathbb{E}_{(s_t, a_t) \sim \rho_\pi} \left[ -log(\pi_t(a_t|s_t)) \right] \ge \mathcal{H} \text{   } \forall t
+\end{displaymath}
+which means maximise the expected return with the constraint that the policy entropy is greater or equal to the desired minimum expected entropy $\mathcal{H}$ for all $t$.
+
+To reduce the difficulty of hyperparameter search, $\alpha$ is dynamically adjusted during training. The gradients for $\alpha$ are computed with the following objective:
+\begin{displaymath}
+J(\alpha) = \mathbb{E}_{a_t \sim \pi_t} \left[ - \alpha log(\pi_t(a_t|s_t)) - \alpha \mathcal{H} \right].
+\end{displaymath}
+
+SAC adopts the twin critic technique from TD3 to reduce the action-value function approximation error.
+
+Unlike TD3, SAC doesn't have a target policy for stabilising the learning since it learns a stochastic policy which doesn't have the unstable learning issue.
+
+\begin{algorithm}
+\caption{Soft Actor-Critic with twin critics \cite{ref:td3} and auto-tuned temperature \cite{ref:sac-auto}}
+\label{alg:sac}
+\begin{algorithmic}
+\State Initialise two critic networks $Q_{\theta_1}$, $Q_{\theta_2}$ and an actor network $\pi_\phi$ with random parameters $\theta_1$, $\theta_2$, $\phi$
+\State Initialise target network weights $\overline{\theta}_i \gets \theta_i$  for $i \in \left\{1,2\right\}$
+\State Initialise an empty replay buffer $\mathcal{B}$
+\For{each iteration}
+    \For{each environment step $t$}
+        \State $a_t \sim \pi_\phi(\cdot|s_t)$
+        \State $s_{t+1} \sim p(\cdot|s_t,a_t)$
+        \State $\mathcal{B} \gets \mathcal{B} \cup \left\{(s_t,a_t,r(s_t,a_t),s_{t+1})\right\}$
+    \EndFor
+    \For{each gradient step}
+        \LComment{$\hat\nabla J$ denotes the estimated gradient of an objective function}
+        \State $\theta_i \gets \theta_i - \lambda_Q\hat\nabla_{\theta_i}J_Q(\theta_i)$ for $i \in \left\{1,2\right\}$
+        \Comment{Backpropagation}
+        \State $\phi \gets \phi - \lambda_\pi\hat\nabla_{\phi}J_\pi(\phi)$
+        \Comment{Backpropagation}
+        \State $\alpha \gets \alpha - \lambda\hat\nabla_{\alpha}J(\alpha)$
+        \Comment{Auto-tune temperature by backpropagation}
+        \LComment{Update target networks' weights:}
+        \State $\overline{\theta}_i \gets \tau\theta_i + (1-\tau)\overline{\theta}_i$ for $i \in \left\{1,2\right\}$
+        \Comment{Exponential moving average}
+    \EndFor
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+}
+\newpage

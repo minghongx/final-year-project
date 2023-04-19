@@ -1,0 +1,46 @@
+\newpage
+\section{Results} \label{sec:results}
+
+\subsection{Integration test}
+
+\begin{figure}[htbp]
+\centering
+\begin{subfigure}[b]{0.49\textwidth}
+   \centering
+   \includesvg[width=\textwidth,pretex=\tiny]{HalfCheetah_episodic_return}
+   \caption{HalfCheetah}
+\end{subfigure}
+\begin{subfigure}[b]{0.49\textwidth}
+   \centering
+   \includesvg[width=\textwidth,pretex=\tiny]{Hopper_episodic_return}
+   \caption{Hopper}
+\end{subfigure}
+\begin{subfigure}[b]{0.49\textwidth}
+   \centering
+   \includesvg[width=\textwidth,pretex=\tiny]{Humanoid_episodic_return}
+   \caption{Humanoid}
+\end{subfigure}
+\begin{subfigure}[b]{0.49\textwidth}
+   \centering
+   \includesvg[width=\textwidth,pretex=\tiny]{InvertedDoublePendulum_episodic_return}
+   \caption{InvertedDoublePendulum}
+\end{subfigure}
+\begin{subfigure}[b]{0.49\textwidth}
+   \centering
+   \includesvg[width=\textwidth,pretex=\tiny]{Ant_episodic_return}
+   \caption{Ant}
+\end{subfigure}
+\begin{subfigure}[b]{0.49\textwidth}
+   \centering
+   \includesvg[width=\textwidth,pretex=\tiny]{Walker2d_episodic_return}
+   \caption{Walker2d}
+\end{subfigure}
+\caption{Episodic return of TD3 in MuJuCo training environments. The abscissa is the episode count, and the ordinate measures the return. The algorithm converges on all six environments. This indicates that the implemented algorithm is effective.}
+\label{fig:td3_test}
+\end{figure}
+
+Figure \ref{fig:td3_test} is the integration test result of TD3. The algorithm successfully converges on all six MuJuCo training environments. This indicates that the algorithm's implementation is valid. Similar testing has been carried out on other algorithms in the library to validate the effectiveness of the implementation. To keep concise, the report ignores reporting the testing results of other algorithms.
+
+\subsection{Trained policies}
+
+The performance of trained policies were recorded as video. Please refer to \url{https://github.com/MinghongAlexXu/final-year-proj}.

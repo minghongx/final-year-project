@@ -1,0 +1,22 @@
+% https://overleaf.com/learn/latex/Questions/I_have_a_custom_font_I%27d_like_to_load_to_my_document._How_can_I_do_this%3F
+% Check that all fonts are embedded: pdffonts .\.build\main.pdf
+% Pay attention to ISO-31 compliant(ish)
+
+\usepackage[otfmath]{XCharter}  % loads fontspec, unicode-math, and sets XCharter-Math.otf
+% \setmathfont{latinmodern-math.otf}[range=cal]  % Latin Modern Math is a clone of Knuth’s Computer Modern but \mathcal alphabet is based on Euler Calligraphic.
+% https://tex.stackexchange.com/questions/504856/why-does-setmathfonttex-gyre-bonum-math-not-work
+\setmathfont{texgyredejavu-math.otf}[range=cal]
+
+% \usepackage{amsmath}
+% \usepackage{unicode-math}
+% \setmainfont[
+%   UprightFont = *,
+%   ItalicFont = *-Italic,
+%   BoldFont = *-Demi,
+%   BoldItalicFont = *-DemiItalic,
+%   Extension = .otf
+% ]{LucidaBrightOT}
+% \setmathfont{LucidaBrightMathOT}
+% \setmathfont[version=bold]{LucidaBrightMathOT-Demi}
+
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}

@@ -1,0 +1,14 @@
+\newpage
+\section{Results}
+
+DDPG and TD3 have been implemented and tested in Gym classic control and MuJoCo envs.
+
+A simulated navigation training based on DDPG has been completed, but the performance was very poor due to frequent performance droping which is a limitation of DDPG. SAC, the successor to DDPG, adds three tricks to mitigate this limitation, and it is hoped that SAC will lead to better results for this project.
+
+\begin{figure}[htbp]
+   \centering
+   \includesvg[width=\textwidth]{sac}
+   \caption{SAC Pseudocode \cite{SpinningUp2018}}
+   \label{fig:sac-pseudocode}
+\end{figure}
+

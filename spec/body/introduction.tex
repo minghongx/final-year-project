@@ -1,0 +1,43 @@
+\section{Introduction}
+
+Reinforcement learning (RL) is a machine learning paradigm which leverages experiences gained through trial and error to optimise a function that implements a policy for a paticular agent in a paticular environment~\cite{SpinningUp2018}.
+
+\begin{figure}[htbp]
+   \centering
+   \includesvg[width=0.5\textwidth]{agent-env-interaction}
+   \caption{Agent-Environment interaction in RL}
+   \label{fig:agent-env-interaction}
+\end{figure}
+
+Deep reinforcement learning (DRL) is a type of RL which exploits deep neural network, an artificial neural network (ANN) composed of serveral layers, for function approximation~\cite{SpinningUp2018}.
+
+Intuitively, agent learns how to act by iteratively taking an action and receiving a reward. Formally, this process is modelled as Markov decision process (MDP) which is a quintuple, $\langle S, A, R, P, \rho_0 \rangle$, where
+\begin{itemize}
+\item $S$, called state space, is the set of all valid states,
+\item $A$, called action space, is the set of all valid actions,
+\item $R$ is the reward function whose input can be state, state-action pair, or state, action, and next state,
+\item $P$ is the transition probability function represents the probaility of transitioning into next state if take a certain action in current state,
+\item and $\rho_0$ is the distribution of initial state~\cite{SpinningUp2018}.
+\end{itemize}
+The problem is how to find an optimal policy which maximises cumulative reward accumulates through each state.
+\begin{displaymath}
+\max_{\pi} \mathbb{E}_{\pi} \left[ \sum_{t} R(s_t,a_t) \right]
+\end{displaymath}
+
+Many algorithms have been proposed to try to solve this problem. These algorithms can be broadly divided into
+\begin{itemize}
+\item model-based which utilises environment model that predicts state transitions and rewards
+\item and model-free which based on common case that the model is not available to agent.
+\end{itemize}
+Two main approaches of model-free algorithm are Policy Optimisation and Q-Learning. Policy Optimisation is stable and reliable but sample ineffient, while Q-Learning is sample effient but is not principled so more likely to fail. Of the three state-of-the-art model-free DRL algorithms, PPO, TD3, and SAC, PPO uses only the first approach, while the latter two are a mixture of both apporaches.
+
+\begin{figure}[htbp]
+   \centering
+   \includesvg[pretex=\tiny,width=\textwidth]{taxonomy-of-algorithms}
+   \caption{A non-exhaustive taxonomy of RL algorithms}
+   \label{fig:taxonomy-of-algorithms}
+\end{figure}
+
+DRL algorithms can be applied to complete robotic tasks. For example, mapless navigation, a motion planning task aims at navigating the robot close to the target and not collide with obstacles during the movement without obstacle map~\cite{Sim2RealDRL4MaplessNavi}. Building and updating global obstacle map is time-consuming and relies on precise dense laser scanner. With the help of emerging localisation methods, DRL can bring a relatively low-cost solution to this task.
+
+The remainder of the report is organised as follows: Project Description gives an overview of the project. Project Specifications lists what will be achieved. Methodology presents how to achieve the objectives. Project Plan lists tasks, milestones, and deliverables. Project Rationale and Industrial Relevance describles motivation from several perspectives. Literature Review discusses relevant previous works. Results reports the progress made so far. Finally, Conclusion concludes the report.

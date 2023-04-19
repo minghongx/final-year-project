@@ -1,0 +1,14 @@
+\section{Methodology}
+
+The beginning of any development activity is research, so the first week is allocated to literature review. Use this step to find out what work has already been done by others and can be used directly.
+
+Although there are many libraries that provide implementation of required DRL algorithm, due to the flexible nature of DRL, I prefer implementing it myself in order to make it easier to add optimisation tricks later on.
+
+Training the policy in an empty world is a sanity test to make sure my implementation of selected algorithm, simulator, virtual robot, reward function, and other components are compatible with each other.
+
+The last step is standard deep learning model development practice which also fits into this DRL development project. The workflow is basically train the model on traning set, evaluate the performace of the trained model on developing set, repeat this loop several times and finally test the model on test set. However, to reduce the workload, the testing stage is removed from the aforementioned iterative development.
+
+The programming language this project will use is Python. Python has a large ecosystem for machine learning, with user-friendly frameworks such as PyTorch and JAX, and rich examples from reinforcement learning community to follow.
+
+The simulator will be Gazebo since it is integrated with Robotic Operating System (ROS) tightly, and ROS provides convenient approachs for data communication, which simplifies the robotics development greatly. In addition, ROS has great amount of robotics-related software packages include mobile robot models which can be imported into Gazebo easily.
+

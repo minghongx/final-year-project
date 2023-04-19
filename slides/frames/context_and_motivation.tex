@@ -1,0 +1,39 @@
+\begin{frame}{Context}
+
+Intuitively, humans and pets often move around indoors without reference to maps or floor plans.
+
+\bigskip
+
+Mapping consists of
+\begin{itemize}
+    \item Map building
+    \item Map interpretation
+    \item Map maintaining
+\end{itemize}
+which imposes intensive computational demand.
+
+\bigskip
+
+Map-based approaches consist of at least six modules, each involves a number of parameters that need to be tuned manually rather than being able to learn from past experience automatically. Moreover, it is difficult for these approaches to generalise well to unanticipated scenarios.
+
+\end{frame}
+
+
+\begin{frame}{Motivation}
+
+DRL approach is simpler than map-based approaches.
+\begin{itemize}
+    \item Less modules involved
+    \item Less parameters
+    \item Better generalisation (expected, not guaranteed)
+\end{itemize}
+
+\bigskip
+
+After training, only forward propagation, which is simply matrix multiplications for multi-layer perceptron (MLP) architecture neural network, is involved in the use of policy. With the development of tensor processing hardware, computation cost will be small.
+
+\bigskip
+
+It may not be as effective as conventional approaches, but because of the generality of DRL, it is worth trying. Even if it doesn't work well, I can still learn knowledge about machine learning from this project.
+
+\end{frame}

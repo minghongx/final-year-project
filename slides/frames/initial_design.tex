@@ -1,0 +1,54 @@
+\begin{frame}{Initial Design}
+
+DDPG \& TD3 components:
+\begin{itemize}
+   \item Neural network architecture: MLP
+   \item Experience replay buffer: uniformly sampled or prioritised
+   \item Exploration strategy: Gaussian noise injection in action space or parameter space
+\end{itemize}
+
+\bigskip
+
+Training program adheres to Gym API which is a de facto DRL programming standard.
+
+\bigskip
+
+Robot selection : Turtlebot3, since it has a great ecosystem on Robot Operating System (ROS).
+
+\bigskip
+
+Program of the training environment partly adhere to Gym API and is wrote for Classic Gazebo Simulator. Classic Gazebo Simulator was selected because it has the best integration with ROS1.
+
+\bigskip
+
+\end{frame}
+
+
+\begin{frame}{Initial Design (continue)}
+
+The reward $r$ at time step $t$ is a weighted sum of three terms $r^g$, $r^c$, and $r^s$:
+\begin{equation*}
+r_t = r_t^g + r_t^c + r_t^s
+\end{equation*}
+
+The robot is awarded by $r_g$ for reaching the navigation goal:
+\begin{equation*}
+r_t^g =
+   \begin{cases}
+   r_{big}, & \text{if } \lVert p_t - g \rVert < \text{tolerance} \\
+   \epsilon(\lVert p_{t-1} - g \rVert - \lVert p_t - g \rVert), & \text{otherwise}
+   \end{cases}
+\end{equation*}
+
+When the robot collides with obstacles, it is penalised by $r_t^c$:
+\begin{equation*}
+r_t^c =
+   \begin{cases}
+   r_{collision}, & \text{if collision} \\
+   0, & \text{otherwise}
+   \end{cases}
+\end{equation*}
+
+A small fixed penalty $r^s$ is given at each time step.
+
+\end{frame}

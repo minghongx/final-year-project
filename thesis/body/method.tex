@@ -1,0 +1,31 @@
+\section{Experimental Method} \label{sec:method}
+
+\subsection{Integration test of the library}
+
+Before deploying the library to the mapless navigation training environment, integration testing was conducted on all algorithms in the library to ensure the implementation was valid. As mapless navigation is a physical environment, it was best to select physically simulated problems for the test cases as well. To quickly test the validness after each modification on the implementation, the test cases were expected to be as simple as possible for fast converging. Based on the above requirements, six locomotion control training environments from \textit{MuJoCo} were selected as the testing bed. In addition, the hyperparameters selected were the same as those used in the original papers of each algorithm. This facilitated comparison between the testing results and the experimental results in the original papers, which was helpful for diagnosing the implementation.
+
+\subsection{Training policies}
+
+As DRL is not yet a mature field, there is no strict training process and policy evaluation metrics in place \cite{ref:drl-that-matters}. Tuning parameters and evaluating policies obtained from training were mostly based on past experience. Although hyperparameter search frameworks such as \textit{Optuna} can be used to search for optimal hyperparameters, in practice, the parameter combinations proposed in the original papers were often sufficient. Therefore, the experiments in this project used the parameters from the original papers. As there was no widely recognised evaluation metric, the only criterion for determining whether a policy had completed training was to observe whether the episodic return curve converged. Once the curve remained stable for a period of time, it was considered to have reached the end of training. In addition, the lack of a standardised evaluation metric meant that comparing which of two policies was better could only be done by repeatedly running them in the environment and observing which policy's behaviour was closer to the expectation.
+
+Although the training process for DRL was not systematic, there was still a fixed pattern that was followed. Initially, the agent started with a random or partially pre-trained policy. The agent then interacted with the environment by taking actions and observing the consequences. These interactions generated a sequence of states, actions, rewards, and new states, also known as a trajectory. As the agent interacted with the environment, it collected data on the trajectories, which were used to estimate the value function. The value function indicated the expected return that the agent could obtain from a given state while following a particular policy. With the value function estimated, the agent then optimised its policy. This step aimed to improve the agent's decision-making by adjusting the policy parameters to better align with the estimated value function. The updated policy should ideally result in the agent choosing actions that lead to higher return. The agent continued to interact with the environment using the updated policy, generating new trajectories and further refining the value function and policy. This iterative process continued until a specified stopping criterion was met, which could be a fixed number of iterations or convergence of the policy. This pattern was also reflected in the algorithms listed in Section \ref{sec:theory}. In code, it was represented as follows:
+\begin{minted}[
+   fontsize=\footnotesize,
+   linenos,
+   breaklines,
+]{python}
+env = Env(arg1, arg2, ...)
+observation = env.reset(seed)
+for step in range(num_steps):
+    action = agent.compute_action(observation)
+    next_observation, reward, terminated, truncated = env.step(action)
+    agent.step(observation, action, reward, next_observation, terminated)
+
+    if not terminated or truncated:
+        observation = next_observation
+    else:
+        observation = env.reset()
+env.close()
+\end{minted}
+
+The policy during the training process was checkpointed at a certain frequency and persisted to the same directory as the training program. The best policy candidates were then selected with respect to the episodic return curve. Finally, the best policy was determined by running each candidates repeatedly and observe the success rate. The policy had the highest success rate was considered to be the best policy. Note that the best policy is not necessarily the optimal policy, since there is no theory guarantee of the policy optimality.
