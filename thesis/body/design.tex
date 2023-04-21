@@ -1,8 +1,10 @@
+\newpage
 \section{Design} \label{sec:design}
 
 \subsection{Algorithm library}
 
 The library is designed to be modular. The code is aimed at supporting research in DRL. Most of it is written in python in a highly modular way, such that researchers can easily swap components, transform them or write new ones with little effort. Figure \ref{fig:sac-uml} is a UML class diagram for SAC. The SAC class contains the main logic of the algorithm. The actor network, critic network, and the replay buffer are spun off from the main logic to form separate classes. These three classes are then passed as arguments into the SAC class. In this way, SAC can use neural networks and replay buffers with different mechanisms, and can also share certain components with other algorithm classes.
+
 \begin{figure}[htbp]
    \centering
    \includesvg[inkscapelatex=false,pretex=\fontsize{9}{12}\selectfont,width=\textwidth]{SAC-UML}
@@ -23,9 +25,6 @@ The library is packaged with the latest Python packing standard, PEP 518 \cite{r
 The development of this library is version-controlled using Git in conjunction with GitHub. The source code, development logs, and statistics can be found here: \url{https://github.com/MinghongAlexXu/deeprl}.
 
 \subsection{Training environment}
-{
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{1.2ex}
 
 Since the purpose is to study DRL using mapless navigation as an example, the training environment is kept as simple as possible. The training environment is modelled in the Gazebo Classic simulator, with a square enclosure measuring $3m \times 3m$ and a flat ground, as shown in Figure \ref{fig:birdview}. TurtleBot3, a simplest differential drive robot with a 2d LiDAR, is chosen as the agent. ROS Noetic is used for communication between the training program and the simulator as a message queue.
 
@@ -35,6 +34,10 @@ Since the purpose is to study DRL using mapless navigation as an example, the tr
    \caption{Aerial view of the training environment in Gazebo Classic.}
    \label{fig:birdview}
 \end{figure}
+
+{
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1.5ex}
 
 The environment spaces and reward signal are defined below.
 
@@ -61,6 +64,8 @@ Reward shaping
 \end{equation*}
 Notice that $c$ is an amplification factor and a parameter of the environment, $s_t \in S$, and $a_t \in A$.
 
+}
+
 To train the obstacle avoidance ability, two training environments with obstacles were designed. In the first environment, as shown in Figure \ref{fig:cluttered}, the obstacles are relatively small, leaving a lot of space for the robot to move. In the other environment, as shown in Figure \ref{fig:escape}, the obstacles are larger, and the paths available for the robot to move are relatively more limited.
 
 \begin{figure}[htbp]
@@ -80,4 +85,4 @@ To train the obstacle avoidance ability, two training environments with obstacle
 \caption{Environments with obstacles}
 \end{figure}
 
-}
+The code for the training environments is available on \url{https://github.com/TACPSLab/SNN4RoboticControl}.

@@ -1,3 +1,4 @@
+\newpage
 \section{Discussion} \label{sec:discussion}
 
 \subsection{Escaping and sparse reward}
@@ -39,7 +40,7 @@ The ideal DRL algorithm should be able to learn expected behaviours effectively 
 
 Normally, in robotic tasks, the agent does not have complete access to the underlying state of the environment. In the case of this project, the agent was only aware of the relative position of the goal, the depth data of it surrounding from LiDAR, and the IMU data. This partial observability can make it difficult for DRL algorithms to learn optimal policies since the agent is not fully aware of its surroundings. From the experimental results, it can be observed that the agent often moves forward and backward multiple times without generate any meaningful movement that helps to achieve the goal. One possible explanation could be that the agent is unaware of its current motion state because the information about the velocity command executed in the previous state is not included in its state space. As the agent does not know whether it was moving forward or backward or turning in the previous state, it can only assess the current situation and generate a new velocity command that is independent of the previous motion state.
 
-\subsection{Transer learning}
+\subsection{Transfer learning}
 
 Transfer learning is the ability to leverage knowledge acquired in one task or domain to improve performance in another related task or domain. Currently, DRL algorithms struggle to transfer knowledge across tasks or even across different instances of the same task, requiring extensive retraining. Due to this limitation, in this project, the policy is trained from scratch for every experiment, which wastes a great amount of time.
 
@@ -49,7 +50,7 @@ Catastrophic forgetting describes the phenomenon where an artificial neural netw
 
 \begin{figure}[htbp]
    \centering
-   \includesvg[width=\textwidth]{InvertedDoublePendulum_episodic_return}
-   \caption{Catastrophic forgetting happened on a TD3 agent trained on the MuJuCo InvertedDoublePendulum environment.}
+   \includesvg[width=\textwidth,pretex=\footnotesize]{InvertedDoublePendulum_episodic_return}
+   \caption{Catastrophic forgetting of a TD3 agent trained on the MuJuCo InvertedDoublePendulum environment.}
    \label{fig:catastrophic-forgetting}
 \end{figure}
