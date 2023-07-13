@@ -1,6 +1,6 @@
 [submodule "deeprl"]
 	path = deeprl
-	url = https://github.com/MinghongAlexXu/deeprl.git
+	url = https://github.com/MinghonZi/deeprl.git
 [submodule "env"]
 	path = env
 	url = https://github.com/TACPSLab/SNN4RoboticControl
