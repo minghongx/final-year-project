@@ -8,6 +8,11 @@
 | [Thesis](thesis/main.pdf) (with one day late penalty) | [85 - 5](feedbacks/thesis-supervisor.pdf) | [81 - 5](feedbacks/thesis-assessor.pdf) | 78 (55%) |
 | **Overall** | N/A | N/A | **74** |
 
+Awarded a *HoD Engineering Ethics Prize* from the dept of EEE.
+
+> **HoD Engineering Ethics Prize Value** \
+> Awarded to the student or team who demonstrate rigour and insight in their analysis or application of ethical principles.
+
 ## Demonstrations
 
 https://user-images.githubusercontent.com/86758413/233221789-9ce959f5-4895-4921-9393-2e0eda7233c8.mp4
