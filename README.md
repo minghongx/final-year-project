@@ -16,6 +16,8 @@ https://user-images.githubusercontent.com/86758413/233221813-2f6d39f4-ada8-479b-
 
 https://user-images.githubusercontent.com/86758413/233753293-8710ea58-4ea1-46d8-b928-f61924262766.mp4
 
+Immediately after the submission of the thesis, someone released [a same project](https://github.com/tomasvr/turtlebot3_drlnav) and the performance is far better than mine.
+
 ## Activity Diary
 
 ```mermaid
