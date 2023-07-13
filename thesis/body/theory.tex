@@ -16,7 +16,7 @@ The reinforcement learning problem can be defined as a policy search in a sequen
 
 The aim is to find a policy that yields the maximal sum of rewards:
 \begin{displaymath}
-\max_{\pi} \sum_{t} \mathbb{E}_{s_t \sim p\pi, a_t \sim \pi} \left[ r(s_t,a_t) \right]
+\max_{\pi} \sum_{t} \mathbb{E}_{s_t \sim p_\pi, a_t \sim \pi} \left[ r(s_t,a_t) \right]
 \end{displaymath}
 
 A trajectory, also known as an episode or rollout, is a sequence of states and actions:

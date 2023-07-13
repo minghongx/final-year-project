@@ -93,7 +93,7 @@ As illustrated in Figure \ref{fig:agent-env-interaction}, the agent learns to ac
 \end{itemize}
 The objective is to find an optimal policy that maximises the cumulative reward accumulated through each state.
 \begin{displaymath}
-\max_{\pi} \sum_{t} \mathbb{E}_{s_t \sim p\pi, a_t \sim \pi} \left[ r(s_t,a_t) \right]
+\max_{\pi} \sum_{t} \mathbb{E}_{s_t \sim p_\pi, a_t \sim \pi} \left[ r(s_t,a_t) \right]
 \end{displaymath}
 
 Numerous algorithms have been proposed to address this problem, which can be broadly divided into:
