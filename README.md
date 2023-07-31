@@ -8,7 +8,7 @@
 | [Thesis](thesis/main.pdf) (with one day late penalty) | [85 - 5](feedbacks/thesis-supervisor.pdf) | [81 - 5](feedbacks/thesis-assessor.pdf) | 78 (55%) |
 | **Overall** | N/A | N/A | **74** |
 
-![HoD Engineering Ethics Prize (Minghong Xu - 22.23)](feedbacks/hod-engineering-ethics-prize.png)
+[![HoD Engineering Ethics Prize (Minghong Xu - 22.23)](feedbacks/hod-engineering-ethics-prize.png)](feedbacks/hod-engineering-ethics-prize.pdf)
 
 ## Demonstrations
 
