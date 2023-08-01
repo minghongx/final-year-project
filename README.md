@@ -32,7 +32,7 @@ gantt
     section Preparation
     Implement SOTA algos: 2022-10-24, 50d
     Sanity test the algos on popular environments: test_algo, 2022-11-15, 28d
-    Algorithms are ready : milestone, 2022-12-13, 0d
+    Algorithms were ready : milestone, 2022-12-13, 0d
     Spawn a robot into a simulator: load_robot, after test_algo, 3d
     Program the training env: program_env, after load_robot, 37d
     Match the interface between algo and env: match_interface,after program_env, 7d
