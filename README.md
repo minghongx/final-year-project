@@ -26,28 +26,27 @@ Immediately after the submission of the thesis, someone released [a same project
 gantt
     dateFormat  YYYY-MM-DD
 
-    Literature Review: literature_review, 2022-10-17, 2022-10-31
+    Literature review: literature_review, 2022-10-1, 90d
+    Interim presentation: milestone, 2022-12-13,
 
     section Preparation
-    Implement a SOTA algo: 2022-10-24, 7d
-    Test the algo on popular environments: test_algo, 2022-10-30, 2d
-    Algorithm is ready : milestone, 2022-11-01, 0d
+    Implement SOTA algos: 2022-10-24, 50d
+    Sanity test the algos on popular environments: test_algo, 2022-11-15, 28d
+    Algorithms are ready : milestone, 2022-12-13, 0d
+    Spawn a robot into a simulator: load_robot, after test_algo, 3d
+    Program the training env: program_env, after load_robot, 37d
+    Match the interface between algo and env: match_interface,after program_env, 7d
+    Training in an empty env: traning_in_empty_env, after match_interface, 9d
+    Trained a workable policy in an empty env: milestone, 2023-2-7,
 
-    section Sanity Test
-    Load the robot into the simulator: load_robot, after test_algo, 3d
-    Set a randomly generated target: generate_target, after load_robot, 5d
-    Define the reward function: after generate_target, 7d
-    Match the interface between algo and simulation: 2022-11-12, 2022-11-20
-    Training: traning_in_empty_world, 2022-11-16, 2022-11-20
-    Trained a policy in an empty world: milestone, 2022-11-20, 
-    
-    section Training
-    Set up an indoor environment filled with obstacles for training: setup_indoor_env, after traning_in_empty_world, 7d
-    Training in the indoor environment: training_in_indoor_env, after setup_indoor_env, 2022-12-16
-    Trained a policy for mapless navi: milestone, after training_in_indoor_env
+    section First Attempt
+    Set up an indoor environment filled with obstacles for training: setup_indoor_env, after traning_in_empty_env, 7d
+    Tinker the reward function: after setup_indoor_env, 7d
+    Training in cluttered environment: training_in_cluttered_env, after setup_indoor_env, 14d
+    Trained a policy for mapless navi: milestone, after training_in_cluttered_env
 
     section Training-Evaluation Loop
-    Set up another environment for evaluating the performance of trained policy: setup_devel_env, after training_in_indoor_env, 7d
-    Repeat Training & Evaluating loop: training_evaluating_loop, after setup_devel_env, 28d
-    Select a policy which has the best performance on evaluating env: milestone, after training_evaluating_loop
+    Set up another environment for evaluating the performance of trained policy: setup_devel_env, after training_in_cluttered_env, 7d
+    Repeat training and evaluating: train_eval, after setup_devel_env, 2023-03-23
+    Bench inspection: milestone, after train_eval
 ```
