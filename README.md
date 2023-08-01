@@ -41,12 +41,18 @@ gantt
 
     section First Attempt
     Set up an indoor environment filled with obstacles for training: setup_indoor_env, after traning_in_empty_env, 7d
-    Tinker the reward function: after setup_indoor_env, 7d
-    Training in cluttered environment: training_in_cluttered_env, after setup_indoor_env, 14d
-    Trained a policy for mapless navi: milestone, after training_in_cluttered_env
+    Tinker the reward function: after setup_indoor_env, 10d
+    Training in a cluttered environment: training_in_cluttered_env, after setup_indoor_env, 14d
+    Observable intelligent mapless navigation behaviour: milestone, after training_in_cluttered_env
 
     section Training-Evaluation Loop
     Set up another environment for evaluating the performance of trained policy: setup_devel_env, after training_in_cluttered_env, 7d
     Repeat training and evaluating: train_eval, after setup_devel_env, 2023-03-23
     Bench inspection: milestone, after train_eval
+
+    section Bachelor's Thesis
+    Collect figures: 2023-03-23, 8d
+    Compose: 2023-03-23, 2023-04-18
+    Edit and proofread: 2023-04-18, 2023-04-20
+    Submitted: milestone, 2023-04-20
 ```
