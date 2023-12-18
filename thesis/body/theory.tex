@@ -52,7 +52,7 @@ Policy optimisation can be done using gradient-based approaches other than polic
 
 \subsection{Actor-Critic}
 
-Actor-Critic refers to an algorithm pattern that estimates a value function in addition to the policy function. The estimated value function is used to assess the policy's action selections. The policy is then optimised in the direction suggested by the value function. Thus, it's natural to think of the value function as a "critic" and the policy as an "actor." The value function could be the action-value (a.k.a. action-quality) $Q(s,a;\theta)$ or state-value $V(s;\theta)$ depending on the algorithm design. Taking action-value actor-critic as an example, the pattern is:
+Actor-Critic refers to an algorithm pattern that estimates a value function in addition to the policy function. The estimated value function is used to assess the policy's action selections. The policy is then optimised in the direction suggested by the value function. Thus, it is natural to think of the value function as a "critic" and the policy as an "actor." The value function could be the action-value (a.k.a. action-quality) $Q(s,a;\theta)$ or state-value $V(s;\theta)$ depending on the algorithm design. Taking action-value actor-critic as an example, the pattern is:
 \begin{align*}
 \theta &\gets \theta - \lambda_Q\nabla_{\theta}J_Q(\theta) \\
 \phi &\gets \phi - \lambda_\pi\nabla_{\phi}J_\pi(\phi),
@@ -159,7 +159,7 @@ J(\alpha) = \mathbb{E}_{a_t \sim \pi_t} \left[ - \alpha log(\pi_t(a_t|s_t)) - \a
 
 SAC adopts the twin critic technique from TD3 to reduce the action-value function approximation error.
 
-Unlike TD3, SAC doesn't have a target policy for stabilising the learning since it learns a stochastic policy which doesn't have the unstable learning issue.
+Unlike TD3, SAC does not have a target policy for stabilising the learning since it learns a stochastic policy which does not have the unstable learning issue.
 
 \begin{algorithm}
 \caption{Soft Actor-Critic with twin critics \cite{ref:td3} and auto-tuned temperature \cite{ref:sac-auto}}
