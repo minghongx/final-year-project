@@ -2,13 +2,13 @@
 
 | | Supervisor | Assessor | Mark |
 | :- | :-: | :-: | :-: |
-| [Specification](feedbacks/specification-annotated.pdf) | [N/A](feedbacks/specification-supervisor.pdf) | [60](feedbacks/specification-assessor.pdf) | 60 (15%) |
-| [Interim Presentation](slides/main.pdf) | [71](feedbacks/interim-presentation-supervisor.pdf) | [66](feedbacks/interim-presentation-assessor.pdf) (Dr Alex Phillips stood in for Prof Jason Ralph) | 69 (15%) |
-| [Bench Inspection](poster/main.pdf) | [79](feedbacks/bench-inspection-supervisor.pdf) | [73](feedbacks/bench-inspection-assessor.pdf) | 76 (15%) |
-| [Thesis](thesis/main.pdf) (with one day late penalty) | [85 - 5](feedbacks/thesis-supervisor.pdf) | [81 - 5](feedbacks/thesis-assessor.pdf) | 78 (55%) |
+| [Specification](feedback/specification-annotated.pdf) | [N/A](feedback/specification-supervisor.pdf) | [60](feedback/specification-assessor.pdf) | 60 (15%) |
+| [Interim Presentation](slides/main.pdf) | [71](feedback/interim-presentation-supervisor.pdf) | [66](feedback/interim-presentation-assessor.pdf) (Dr Alex Phillips stood in for Prof Jason Ralph) | 69 (15%) |
+| [Bench Inspection](poster/main.pdf) | [79](feedback/bench-inspection-supervisor.pdf) | [73](feedback/bench-inspection-assessor.pdf) | 76 (15%) |
+| [Thesis](thesis/main.pdf) (with one day late penalty) | [85 - 5](feedback/thesis-supervisor.pdf) | [81 - 5](feedback/thesis-assessor.pdf) | 78 (55%) |
 | **Overall** | N/A | N/A | **74** |
 
-[![HoD Engineering Ethics Prize (Minghong Xu - 22.23)](feedbacks/hod-engineering-ethics-prize.png)](feedbacks/hod-engineering-ethics-prize.pdf)
+[![HoD Engineering Ethics Prize (Minghong Xu - 22.23)](feedback/hod-engineering-ethics-prize.png)](feedback/hod-engineering-ethics-prize.pdf)
 
 ## Demonstrations
 
