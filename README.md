@@ -1,3 +1,13 @@
+## Demonstrations
+
+https://user-images.githubusercontent.com/86758413/233221789-9ce959f5-4895-4921-9393-2e0eda7233c8.mp4
+
+https://user-images.githubusercontent.com/86758413/233221813-2f6d39f4-ada8-479b-97b9-0966306220dc.mp4
+
+https://user-images.githubusercontent.com/86758413/233753293-8710ea58-4ea1-46d8-b928-f61924262766.mp4
+
+Immediately after the submission of the thesis, someone released [a same project](https://github.com/tomasvr/turtlebot3_drlnav) and the performance is far better than mine.
+
 ## Assessment Results
 
 | | Supervisor | Assessor | Mark |
@@ -9,16 +19,6 @@
 | **Overall** | N/A | N/A | **74** |
 
 [![HoD Engineering Ethics Prize (Minghong Xu - 22.23)](feedback/hod-engineering-ethics-prize.png)](feedback/hod-engineering-ethics-prize.pdf)
-
-## Demonstrations
-
-https://user-images.githubusercontent.com/86758413/233221789-9ce959f5-4895-4921-9393-2e0eda7233c8.mp4
-
-https://user-images.githubusercontent.com/86758413/233221813-2f6d39f4-ada8-479b-97b9-0966306220dc.mp4
-
-https://user-images.githubusercontent.com/86758413/233753293-8710ea58-4ea1-46d8-b928-f61924262766.mp4
-
-Immediately after the submission of the thesis, someone released [a same project](https://github.com/tomasvr/turtlebot3_drlnav) and the performance is far better than mine.
 
 ## Activity Diary
 
